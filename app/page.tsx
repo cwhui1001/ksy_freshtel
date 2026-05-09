@@ -4,13 +4,16 @@ import PlansSection from "@/components/PlansSection";
 
 export default function Home() {
   return (
-    <main className="flex flex-col min-h-screen">
+    <main className="flex flex-col min-h-screen relative">
       {/* Hero Section */}
-      <section className="relative bg-[#FFF4F4] px-4 md:px-12 py-12 md:py-24 flex flex-col md:flex-row items-center overflow-hidden uppercase font-sans">
+      <section className="relative bg-[#FFF4F4] px-4 md:px-40 pt-12 pb-32 md:pt-24 md:pb-48 flex flex-col md:flex-row items-center overflow-hidden uppercase font-sans">
+        {/* Background Sketch Pattern - approximated by a simple SVG pattern */}
+        <div className="absolute inset-0 opacity-[0.05] pointer-events-none" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 10l20 20M80 10l-10 10M50 50l15 5M20 80l10-5' stroke='%23EF4444' stroke-width='1' fill='none'/%3E%3C/svg%3E")` }}></div>
+        
         <div className="flex-1 z-10">
-          <h1 className="text-[#1B365D] text-5xl md:text-7xl font-black mb-4 leading-tight tracking-tight">
+          <h1 className="text-[#1B365D] text-5xl md:text-6xl font-black mb-4 leading-tight tracking-tight">
             NON STOP<br />
-            STREAMING <span className="text-[#3B82F6]">24/7</span>
+            STREAMING <span className="text-[#3B82F6]"> 24/7</span>
           </h1>
           <p className="text-zinc-600 text-lg md:text-xl max-w-lg mb-8 normal-case font-medium">
             Get a whole year of reliable, high-speed internet with our 100Mbps plan.
@@ -23,39 +26,42 @@ export default function Home() {
           </Link>
         </div>
         
-        <div className="flex-1 mt-12 md:mt-0 relative flex justify-center items-center">
-            {/* Main content image placeholder as seen in UI */}
-            <div className="relative w-full aspect-[4/3] max-w-2xl bg-[#D1D5DB] rounded-[2.5rem] overflow-hidden shadow-2xl border-8 border-white">
-                <div className="absolute inset-0 flex items-center justify-center text-zinc-500 font-bold italic normal-case text-center px-4">
-                   Hero Image (Happy family using devices)
-                </div>
+        <div className="flex-1 mt-12 md:mt-0 relative flex justify-center items-center z-10">
+            {/* Main content image */}
+            <div className="relative w-full aspect-[4/3] max-w-xl rounded-b-[5rem] rounded-tl-[5rem] rounded-tr-[2rem] overflow-hidden shadow-2xl border-b-[12px] border-white">
+                <Image 
+                  src="/images/hero-family.jpg"
+                  alt="Family enjoying high-speed internet"
+                  fill
+                  className="object-cover"
+                  priority
+                />
             </div>
             
-            {/* Watermark/Background text like in sample */}
-            <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-[0.03] select-none">
-              <span className="text-[20rem] font-black">SHAKE</span>
+            {/* Background text decoration */}
+            <div className="absolute -bottom-10 -right-10 opacity-[0.05] select-none text-[12rem] font-black pointer-events-none">
+              SHARE
             </div>
         </div>
       </section>
 
-      {/* Feature Icons Section */}
-      <section className="bg-white py-12 px-4 md:px-12 -mt-10 z-20">
-        <div className="max-w-7xl mx-auto flex flex-wrap justify-between gap-8 border bg-white rounded-3xl p-8 shadow-sm">
-           <FeatureItem icon={<SignalIcon />} title="Maximum Coverage" />
-           <FeatureItem icon={<UsersIcon />} title="Stable Connection" />
-           <FeatureItem icon={<MagicIcon />} title="Flexible" />
-           <FeatureItem icon={<DollarIcon />} title="Affordable Price" />
-           <FeatureItem icon={<TrophyIcon />} title="Best Service" />
+      {/* Feature Icons Section - Floating Half-way */}
+      <section className="relative z-30">
+        <div className="max-w-7xl mx-auto w-full px-4 md:px-24 -mt-16">
+          <div className="bg-white rounded-3xl p-8 shadow-2xl flex flex-wrap justify-between items-center gap-6 border border-zinc-100">
+             <FeatureItem icon={<SignalIcon />} title="Maximum Coverage" />
+             <FeatureItem icon={<UsersIcon />} title="Stable Connection" />
+             <FeatureItem icon={<MagicIcon />} title="Flexible" />
+             <FeatureItem icon={<DollarIcon />} title="Affordable Price" />
+             <FeatureItem icon={<TrophyIcon />} title="Best Service" />
+          </div>
         </div>
       </section>
 
       {/* Plans Section */}
       <PlansSection />
 
-      {/* AI Assistant Button (Floating) */}
-      <div className="fixed bottom-0 right-12 mb-0 bg-[#6B7280] text-white px-6 py-2 rounded-t-xl text-sm shadow-xl cursor-default">
-        Have a question? Ask our latest AI assistant.
-      </div>
+      
     </main>
   );
 }
