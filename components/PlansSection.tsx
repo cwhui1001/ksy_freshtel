@@ -2,6 +2,7 @@
 
 import { useState, useCallback, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import useEmblaCarousel from 'embla-carousel-react';
 
 const CONTRACT_OPTIONS = [
@@ -267,19 +268,19 @@ export default function PlansSection() {
     <section id="plans" className="py-20 bg-white">
       <div className="container mx-auto px-4">
         {/* Header */}
-        <div className="text-center mb-12">
-          <h2 className="text-5xl font-black text-black mb-8 font-sans">Get Your Plan Now</h2>
+        <div className="text-center mb-4">
+          <h2 className="text-6xl font-black text-black mb-8 font-sans">Get Your Plan Now</h2>
           
           {/* Contract Switcher */}
-          <div className="inline-flex bg-[#F5F5F5] p-2 rounded-xl">
+          <div className="inline-flex bg-[#F1F1F1] p-1.5 rounded-xl">
             {CONTRACT_OPTIONS.map((opt) => (
               <button
                 key={opt.id}
                 onClick={() => setSelectedContract(opt.id)}
-                className={`px-6 py-3 rounded-lg font-bold transition-all ${
+                className={`px-8 py-3 rounded-lg font-bold text-lg transition-all ${
                   selectedContract === opt.id 
-                    ? 'bg-white text-[#EF4444] shadow-sm' 
-                    : 'text-zinc-500 hover:text-zinc-800'
+                    ? 'bg-[#EF4444] text-white shadow-md' 
+                    : 'text-zinc-700 hover:text-zinc-900'
                 }`}
               >
                 {opt.label}
@@ -293,7 +294,7 @@ export default function PlansSection() {
           <div className="overflow-hidden" ref={emblaRef}>
             <div className="flex">
               {currentPlans.map((plan) => (
-                <div key={plan.id} className="flex-[0_0_100%] min-w-0 md:flex-[0_0_33.33%] px-4 py-8">
+                <div key={plan.id} className="flex-[0_0_100%] min-w-0 md:flex-[0_0_33.33%] px-6 py-20">
                   <PlanCard plan={plan} />
                 </div>
               ))}
@@ -335,63 +336,93 @@ export default function PlansSection() {
 
 function PlanCard({ plan }: { plan: Plan }) {
   return (
-    <div className={`relative flex flex-col p-8 rounded-2xl transition-all hover:scale-[1.02] h-full ${
+    <div className={`relative flex flex-col p-10 rounded-2xl transition-all hover:scale-[1.01] h-full ${
       plan.highlight 
-        ? 'bg-[#FDF2F2] border-4 border-[#EF4444] ring-8 ring-[#EF4444]/5 mt-8' 
-        : 'bg-white border border-zinc-100 shadow-xl'
+        ? 'bg-white border-[6px] border-[#EF4444] shadow-2xl relative z-10' 
+        : 'bg-[#F9F8F3] border border-zinc-200'
     }`}>
       {plan.highlight && plan.badge && (
-        <div className="absolute -top-12 left-[-4px] right-[-4px] bg-[#EF4444] text-white py-2 rounded-t-2xl text-center font-black uppercase text-sm">
-          {plan.badge}
-        </div>
+        <>
+          <div className="absolute -top-10 left-0 right-0 bg-[#EF4444] text-white py-3 rounded-t-2xl text-center font-black uppercase text-sm tracking-wide z-20">
+            {plan.badge}
+          </div>
+          
+          {/* Gift/Mesh Banner */}
+          <div className="absolute -top-[98px] -left-12 z-30 pointer-events-none">
+             <div className="relative w-[115px] h-[100px] -rotate-15">
+                <Image 
+                  src="/images/gift-box.png" 
+                  alt="Free Mesh Router" 
+                  fill
+                  className="object-contain"
+                />
+             </div>
+          </div>
+
+          {/* Most Popular Ribbon */}
+          <div className="absolute top-4 -right-8 z-40 pointer-events-none scale-90">
+            <div className="relative">
+              <div className="bg-gradient-to-b from-[#EF4444] to-[#B91C1C] text-white px-6 py-3 rounded-md shadow-2xl flex flex-col items-center justify-center min-w-[120px] border-l-4 border-white transform skew-y-[-2deg]">
+                <span className="text-[12px] font-black uppercase tracking-wider leading-none">Most</span>
+                <span className="text-xl font-black uppercase tracking-tight leading-none mt-1">Popular</span>
+              </div>
+              {/* Ribbon Tail shadow fold */}
+              <div className="absolute -top-1 right-1 w-3 h-3 bg-red-900 z-[-1] skew-x-[45deg]"></div>
+            </div>
+          </div>
+        </>
       )}
 
-      <div className="flex flex-col h-full">
-        {plan.selectedLocationOnly ? (
-          <span className="text-[10px] text-zinc-400 font-bold mb-2 h-4">
-            {plan.locationText || '**Selected location only'}
-          </span>
-        ) : (
-          <div className="mb-2 h-4" />
-        )}
-
-        <div className="mb-6 text-center">
-          <h3 className="text-zinc-500 font-bold text-sm uppercase tracking-wide">{plan.title}</h3>
-          <div className={`text-4xl font-black mb-2 ${plan.highlight ? 'text-[#EF4444]' : 'text-zinc-900'}`}>
+      <div className="flex flex-col h-full pt-4">
+        <div className="mb-0 text-left">
+          <h3 className="text-zinc-600 font-bold text-base mb-1">{plan.title}</h3>
+          <div className={`text-5xl font-black mb-1 ${plan.highlight ? 'text-zinc-900' : 'text-zinc-900'}`}>
             {plan.speed}
           </div>
-          <div className="flex items-baseline justify-center gap-1">
+          <div className="flex items-baseline justify-start gap-1">
             <span className="text-4xl font-black text-[#EF4444]">RM{plan.price}</span>
             <span className="text-xs font-bold text-zinc-500 uppercase">Per Month</span>
           </div>
-          <p className="text-zinc-500 text-sm mt-4 min-h-[60px]">{plan.description}</p>
+          <p className="text-zinc-500 text-base mt-3 min-h-[44px] leading-snug">{plan.description}</p>
         </div>
 
-        <div className="w-full h-px bg-zinc-100 mb-6" />
+        <div className="w-full h-px bg-zinc-300 my-6" />
 
         <div className="flex-1 flex flex-col">
-          <h4 className="text-xs font-black text-zinc-400 uppercase tracking-widest mb-4">Our best offers</h4>
-          <ul className="space-y-4 mb-8">
+          <h4 className="text-sm font-bold text-zinc-500 mb-4">Our best offers</h4>
+          <ul className="space-y-4 mb-6">
             {plan.features.map((feature, i) => (
-              <li key={i} className="flex items-start gap-4">
-                <span className="text-[#EF4444] text-lg mt-[-2px]">✓</span>
-                <p className={`text-sm leading-tight ${feature.isBold ? 'font-black text-zinc-800' : 'text-zinc-600'}`}>
-                  {feature.isComplimentary && <span className="text-[#EF4444] block mb-1">Complimentary</span>}
-                  {feature.text}
-                </p>
+              <li key={i} className="flex items-center gap-3">
+                <div className="w-8 h-8 rounded-full bg-[#EF4444] flex items-center justify-center flex-shrink-0">
+                   <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                   </svg>
+                </div>
+                <div className="flex flex-col">
+                  {feature.isComplimentary && (
+                    <span className="text-[#EF4444] font-black text-base block leading-tight">Complimentary</span>
+                  )}
+                  <p className={`text-base leading-tight ${feature.isBold ? 'font-bold text-zinc-800' : 'text-zinc-600'}`}>
+                    {feature.text}
+                  </p>
+                </div>
               </li>
             ))}
           </ul>
 
           {plan.addons && (
             <div className="mt-auto">
-              <div className="w-full h-px bg-zinc-100 mb-6" />
-              <h4 className="text-xs font-black text-zinc-400 uppercase tracking-widest mb-4">Addons</h4>
-              <ul className="space-y-4 mb-6">
+              <div className="w-full h-px bg-zinc-300 my-6" />
+              <h4 className="text-sm font-bold text-zinc-500 mb-4">Addons</h4>
+              <ul className="space-y-3 mb-4">
                 {plan.addons.map((addon, i) => (
-                  <li key={i} className="flex items-start gap-4">
-                    <span className="text-zinc-300 text-lg mt-[-2px]">+</span>
-                    <p className="text-xs text-zinc-600 leading-relaxed italic">{addon.text}</p>
+                  <li key={i} className="flex items-start gap-3">
+                    <div className="w-8 h-8 rounded-full bg-[#EF4444] flex items-center justify-center flex-shrink-0">
+                       <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M12 4v16m8-8H4" />
+                       </svg>
+                    </div>
+                    <p className="text-sm text-zinc-700 leading-tight font-medium mt-1">{addon.text}</p>
                   </li>
                 ))}
               </ul>
@@ -399,29 +430,19 @@ function PlanCard({ plan }: { plan: Plan }) {
           )}
         </div>
 
-        <div className="mt-auto pt-6">
+        <div className="mt-auto pt-4">
           <Link 
             href="/signup" 
-            className={`w-full block py-4 rounded-xl text-center font-black text-sm transition-all shadow-lg ${
-              plan.highlight 
-                ? 'bg-[#EF4444] text-white hover:bg-red-600' 
-                : 'bg-zinc-100 text-zinc-800 hover:bg-zinc-200 shadow-none'
-            }`}
+            className="w-full block py-4 rounded-xl text-center font-black text-lg transition-all shadow-xl bg-[#EF4444] text-white hover:bg-red-600 hover:scale-[1.02]"
           >
             SUBSCRIBE NOW
           </Link>
           
-          <p className="text-[10px] text-zinc-400 text-center mt-4 leading-tight italic">
+          <p className="text-[10px] text-zinc-400 text-center mt-6 leading-tight italic">
             *All prices are subject to 6% SST<br />T&C apply
           </p>
         </div>
       </div>
-
-      {plan.highlight && (
-        <div className="absolute inset-0 rounded-2xl overflow-hidden pointer-events-none opacity-[0.03]">
-           <div className="absolute inset-x-0 top-0 h-2 bg-gradient-to-r from-transparent via-white to-transparent animate-shimmer" />
-        </div>
-      )}
     </div>
   );
 }

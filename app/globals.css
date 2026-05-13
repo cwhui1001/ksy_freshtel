@@ -24,3 +24,63 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+@layer components {
+  .cust-packagepresent {
+    position: relative;
+    border-radius: 20px;
+  }
+
+  .cust-packageanimation {
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    top: -50%;
+    left: -50%;
+    background: conic-gradient(
+      from 0deg,
+      transparent 0,
+      transparent 20%,
+      rgba(239, 68, 68, 0.4) 25%,
+      transparent 30%,
+      transparent 100%
+    );
+    animation: rotate 4s linear infinite;
+    z-index: 0;
+  }
+
+  @keyframes rotate {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .banner-ribbon {
+    position: absolute;
+    top: 50px;
+    right: -15px;
+    background: #EF4444;
+    color: white;
+    padding: 8px 12px;
+    font-weight: 900;
+    transform: rotate(2deg);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    z-index: 30;
+    border-radius: 4px;
+  }
+
+  .banner-ribbon::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-radius: 4px;
+    pointer-events: none;
+  }
+}
