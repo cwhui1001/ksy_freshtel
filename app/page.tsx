@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import PlansSection from "@/components/PlansSection";
+import TermsAndConditions from "@/components/TermsAndConditions";
 
 export default function Home() {
   return (
@@ -60,6 +61,9 @@ export default function Home() {
 
       {/* Plans Section */}
       <PlansSection />
+
+      {/* Terms and Conditions Section */}
+      <TermsAndConditions />
 
       
     </main>
