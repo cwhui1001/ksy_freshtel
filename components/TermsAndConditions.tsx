@@ -12,13 +12,7 @@ export default function TermsAndConditions() {
         
         <ol className="list-decimal list-outside space-y-4 ml-6 text-zinc-900">
           <li className="pl-2">
-            <span className="font-bold">RM150</span> of installation fee and <span className="font-bold">RM150</span> of deposit will be charged to <span className="font-bold">100 Mbps subscription plan</span> for <span className="font-bold">Highrise property</span> per unit.
-          </li>
-          <li className="pl-2">
-            <span className="font-bold">RM300</span> of installation fee will be charged to <span className="font-bold">100 Mbps subscription plan</span> for <span className="font-bold">Landed property</span> per unit.
-          </li>
-          <li className="pl-2">
-            <span className="font-bold">Complimentary mesh router</span> is only available in 30-months contract with 300 Mbps subscription plan.
+            <span className="font-bold">Complimentary mesh router</span> is only available in <span className="font-bold">30-months contract</span> with <span className="font-bold">300 Mbps subscription plan</span>.
           </li>
           <li className="pl-2">
             <span className="font-bold">RM300</span> of installation fee will be charged to <span className="font-bold">100 Mbps subscription plan</span> for <span className="font-bold">Landed property</span> per unit.
@@ -38,10 +32,7 @@ export default function TermsAndConditions() {
             The recurring charge will apply for the full contract duration and continue automatically while the service remains active.
           </li>
           <li className="pl-2">
-            500 Mbps and above subscription plan are available in selected locations only.
-          </li>
-          <li className="pl-2">
-            500 Mbps and above are available in selected location only.
+            <span className="font-bold">500 Mbps and above</span> are available in <span className="font-bold">selected location only</span>.
           </li>
           <li className="pl-2">
             For passport holder(s):
@@ -58,7 +49,7 @@ export default function TermsAndConditions() {
             Standard installation is subject to management approval.
           </li>
           <li className="pl-2">
-            All prices are subject to 6% SST.
+            All prices are subject to <span className="font-bold">6% SST</span>.
           </li>
           <li className="pl-2">
             Please review our comprehensive Terms & Conditions{" "}

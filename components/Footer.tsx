@@ -25,9 +25,8 @@ export default function Footer() {
         <div>
           <h3 className="font-bold text-lg mb-6">Quick Links</h3>
           <ul className="space-y-4 text-zinc-400 text-sm">
-            <li><Link href="/aboutus" className="hover:text-white transition-colors">About Us</Link></li>
+            <li><Link href="/about" className="hover:text-white transition-colors">About Us</Link></li>
             <li><Link href="/" className="hover:text-white transition-colors">Packages</Link></li>
-            <li><Link href="/contact" className="hover:text-white transition-colors">Contact Us</Link></li>
           </ul>
         </div>
 
@@ -35,16 +34,24 @@ export default function Footer() {
           <h3 className="font-bold text-lg mb-6">Legal</h3>
           <ul className="space-y-4 text-zinc-400 text-sm">
             <li><Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link></li>
-            <li><Link href="/terms" className="hover:text-white transition-colors">Terms of Service</Link></li>
+            <li><Link href="/terms-conditions" className="hover:text-white transition-colors">Terms & Conditions</Link></li>
           </ul>
         </div>
 
         <div>
           <h3 className="font-bold text-lg mb-6">Support</h3>
-          <p className="text-zinc-400 text-sm mb-4">
-            Mon - Fri: 9:00 AM - 6:00 PM<br />
-            Sat: 9:00 AM - 1:00 PM
-          </p>
+          <ul className="space-y-4 text-zinc-400 text-sm mb-4">
+            <li>
+              <a href="tel:+601135503022" className="hover:text-white transition-colors">
+                +60 11-3550 3022
+              </a>
+            </li>
+            <li>
+            <a href="mailto:admin@freshtel.online" className="hover:text-white transition-colors">
+                admin@freshtel.online
+            </a>
+            </li>
+          </ul>
           <div className="flex gap-4">
             {/* Social icons could go here */}
           </div>

@@ -1,7 +1,12 @@
+'use client';
+
 import Link from 'next/link';
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 
 export default function Navbar() {
+  const pathname = usePathname();
+
   return (
     <nav className="w-full flex flex-col">
       {/* Main navigation bar */}
@@ -21,8 +26,18 @@ export default function Navbar() {
         </div>
         
         <div className="hidden md:flex items-center gap-8 text-sm font-bold text-zinc-800 uppercase">
-          <Link href="/about" className="hover:text-[#EF4444]">About Us</Link>
-          <Link href="/" className="hover:text-[#EF4444]">Packages</Link>
+          <Link 
+            href="/about" 
+            className={`${pathname === '/about' ? 'text-[#EF4444]' : 'text-zinc-800'} hover:text-[#EF4444] transition-colors`}
+          >
+            About Us
+          </Link>
+          <Link 
+            href="/" 
+            className={`${pathname === '/' ? 'text-[#EF4444]' : 'text-zinc-800'} hover:text-[#EF4444] transition-colors`}
+          >
+            Packages
+          </Link>
         </div>
       </div>
 
