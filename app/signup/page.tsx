@@ -406,9 +406,32 @@ interface FormData {
   nricPassport: string;
   email: string;
   mobile: string;
+  secondaryMobile?: string;
+  emergencyMobile?: string;
+  dob?: string;
+  contactPersonName?: string;
+  companyRegNo?: string;
+  tradeName?: string;
+  financeContactName?: string;
+  financeContactMobile?: string;
+  financeContactEmail?: string;
+  remarks?: string;
+  promoCode?: string;
+  telcoProvider?: string;
+  agentCode?: string;
   termsAgreed: boolean;
   payMethod: string;
   files: File[];
+  icFile?: File | null;
+  ssmFile?: File | null;
+  spaFile?: File | null;
+  vpLetterFile?: File | null;
+  tenancyAgreementFile?: File | null;
+  authLetterFile?: File | null;
+  ownerTenantFiles?: File[];
+  additionalFile?: File | null;
+  paymentSlipFile?: File | null;
+  applicationFormFile?: File | null;
 }
 
 interface StepProps {
@@ -435,9 +458,32 @@ export default function SignupPage() {
     nricPassport: '',
     email: '',
     mobile: '',
+    secondaryMobile: '',
+    emergencyMobile: '',
+    dob: '',
+    contactPersonName: '',
+    companyRegNo: '',
+    tradeName: '',
+    financeContactName: '',
+    financeContactMobile: '',
+    financeContactEmail: '',
+    remarks: '',
+    promoCode: '',
+    telcoProvider: '',
+    agentCode: '',
     termsAgreed: false,
     payMethod: 'pay_later',
-    files: []
+    files: [],
+    icFile: null,
+    ssmFile: null,
+    spaFile: null,
+    vpLetterFile: null,
+    tenancyAgreementFile: null,
+    authLetterFile: null,
+    ownerTenantFiles: [],
+    additionalFile: null,
+    paymentSlipFile: null,
+    applicationFormFile: null
   });
 
   const nextStep = () => setStep(prev => Math.min(prev + 1, 4));
@@ -701,21 +747,43 @@ function Step1Plan({ formData, setFormData, onNext }: StepProps) {
 }
 
 function Step2Details({ formData, setFormData, onNext, onPrev }: StepProps) {
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) {
-      const newFiles = Array.from(e.target.files);
-      setFormData({
-        ...formData,
-        files: [...formData.files, ...newFiles]
-      });
-    }
-  };
+  const TELCO_PROVIDERS = [
+    { label: "Celcom", value: "8" },
+    { label: "cw", value: "10" },
+    { label: "Digi", value: "5" },
+    { label: "Eight", value: "12" },
+    { label: "hi", value: "14" },
+    { label: "Hotlink", value: "4" },
+    { label: "Maxis", value: "1" },
+    { label: "M one", value: "18" },
+    { label: "Redone Mobile", value: "9" },
+    { label: "Simba", value: "13" },
+    { label: "Singtel", value: "11" },
+    { label: "sparx", value: "19" },
+    { label: "Time", value: "3" },
+    { label: "Tune Talk", value: "6" },
+    { label: "UMobile", value: "7" },
+    { label: "Unifi", value: "2" },
+    { label: "xo", value: "17" },
+    { label: "XOX Mobile", value: "15" },
+    { label: "yes", value: "16" }
+  ];
 
-  const removeFile = (index: number) => {
-    setFormData({
-      ...formData,
-      files: formData.files.filter((_, i) => i !== index)
-    });
+  const handleFileChange = (field: keyof FormData, e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      if (e.target.multiple) {
+        const newFiles = Array.from(e.target.files);
+        setFormData(prev => ({
+          ...prev,
+          [field]: [...(prev[field] as File[] || []), ...newFiles]
+        }));
+      } else {
+        setFormData(prev => ({
+          ...prev,
+          [field]: e.target.files![0]
+        }));
+      }
+    }
   };
 
   const isStep2Valid = 
@@ -723,18 +791,20 @@ function Step2Details({ formData, setFormData, onNext, onPrev }: StepProps) {
     formData.nricPassport.trim() !== '' && 
     formData.email.trim() !== '' && 
     formData.mobile.trim() !== '' && 
-    formData.files.length > 0 && 
     formData.termsAgreed;
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-      <div className="space-y-6">
-        <div>
-          <label className="block text-sm font-black text-zinc-900 uppercase tracking-widest mb-2">Nationality</label>
+    <div className="space-y-12">
+      <h3 className="text-2xl font-black text-center text-zinc-900 uppercase tracking-widest">Fill In Details</h3>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
+        {/* Nationality */}
+        <div className="space-y-2">
+          <label className="block text-sm font-black text-zinc-900 uppercase tracking-widest">Nationality</label>
           <div className="flex gap-4">
             <button 
               className={`flex-1 py-4 rounded-xl font-black text-xs tracking-widest transition-all ${
-                formData.nationality === 'MALAYSIAN' ? 'bg-[#EF4444] text-white shadow-lg' : 'bg-white border-2 border-zinc-200 text-zinc-400'
+                formData.nationality === 'MALAYSIAN' ? 'bg-[#EF4444] text-white shadow-lg' : 'bg-white border-2 border-zinc-200 text-zinc-400 hover:border-zinc-300'
               }`}
               onClick={() => setFormData({...formData, nationality: 'MALAYSIAN'})}
             >
@@ -742,17 +812,23 @@ function Step2Details({ formData, setFormData, onNext, onPrev }: StepProps) {
             </button>
             <button 
               className={`flex-1 py-4 rounded-xl font-black text-xs tracking-widest transition-all ${
-                formData.nationality === 'NON-MALAYSIAN' ? 'bg-[#EF4444] text-white shadow-lg' : 'bg-white border-2 border-zinc-200 text-zinc-400'
+                formData.nationality === 'NON-MALAYSIAN' ? 'bg-[#EF4444] text-white shadow-lg' : 'bg-white border-2 border-zinc-200 text-zinc-400 hover:border-zinc-300'
               }`}
               onClick={() => setFormData({...formData, nationality: 'NON-MALAYSIAN'})}
             >
               NON-MALAYSIAN
             </button>
           </div>
+          {formData.nationality === 'NON-MALAYSIAN' && (
+            <p className="text-xs font-bold text-[#EF4444] mt-2 italic">* Your package will charge a deposit of RM150.00</p>
+          )}
         </div>
 
-        <div>
-          <label className="block text-sm font-black text-zinc-900 uppercase tracking-widest mb-2">Full Name</label>
+        {/* Name */}
+        <div className="space-y-2">
+          <label className="block text-sm font-black text-zinc-900 uppercase tracking-widest">
+            {formData.applicantType === 'BUSINESS' ? 'Account Name' : 'Name'}
+          </label>
           <input 
             className="w-full bg-white border-2 border-zinc-200 rounded-xl px-6 py-4 focus:border-[#EF4444] outline-none transition-all font-bold text-zinc-900 placeholder:text-zinc-300"
             value={formData.name}
@@ -760,19 +836,37 @@ function Step2Details({ formData, setFormData, onNext, onPrev }: StepProps) {
           />
         </div>
 
-        <div>
-          <label className="block text-sm font-black text-zinc-900 uppercase tracking-widest mb-2">NRIC / Passport</label>
+        {/* IC / Passport */}
+        <div className="space-y-2">
+          <label className="block text-sm font-black text-zinc-900 uppercase tracking-widest">
+            {formData.nationality === 'MALAYSIAN' ? 'NRIC' : 'Passport No.'}
+          </label>
           <input 
             className="w-full bg-white border-2 border-zinc-200 rounded-xl px-6 py-4 focus:border-[#EF4444] outline-none transition-all font-bold text-zinc-900 placeholder:text-zinc-300"
+            placeholder={formData.nationality === 'MALAYSIAN' ? 'Eg: 880101109999' : 'Passport No.'}
+            maxLength={formData.nationality === 'MALAYSIAN' ? 12 : undefined}
             value={formData.nricPassport}
             onChange={(e) => setFormData({...formData, nricPassport: e.target.value})}
           />
         </div>
-      </div>
 
-      <div className="space-y-6">
-        <div>
-          <label className="block text-sm font-black text-zinc-900 uppercase tracking-widest mb-2">Email</label>
+        {/* Contact Person Name (Only for Business) */}
+        {formData.applicantType === 'BUSINESS' && (
+          <div className="space-y-2">
+            <label className="block text-sm font-black text-zinc-900 uppercase tracking-widest">Contact Person Name</label>
+            <input 
+              className="w-full bg-white border-2 border-zinc-200 rounded-xl px-6 py-4 focus:border-[#EF4444] outline-none transition-all font-bold text-zinc-900"
+              value={formData.contactPersonName}
+              onChange={(e) => setFormData({...formData, contactPersonName: e.target.value})}
+            />
+          </div>
+        )}
+
+        {/* Email */}
+        <div className="space-y-2">
+          <label className="block text-sm font-black text-zinc-900 uppercase tracking-widest">
+            {formData.applicantType === 'BUSINESS' ? 'Contact Email' : 'Email'}
+          </label>
           <input 
             type="email"
             className="w-full bg-white border-2 border-zinc-200 rounded-xl px-6 py-4 focus:border-[#EF4444] outline-none transition-all font-bold text-zinc-900 placeholder:text-zinc-300"
@@ -782,85 +876,306 @@ function Step2Details({ formData, setFormData, onNext, onPrev }: StepProps) {
           />
         </div>
 
-        <div>
-          <label className="block text-sm font-black text-zinc-900 uppercase tracking-widest mb-2">Primary Contact</label>
-          <div className="flex bg-white border-2 border-zinc-200 rounded-xl overflow-hidden focus-within:border-[#EF4444] transition-all">
-            <div className="bg-zinc-100 flex items-center px-4 border-r-2 border-zinc-200 font-bold text-zinc-500">+60</div>
-            <input 
-              className="flex-1 px-6 py-4 outline-none font-bold text-zinc-900 placeholder:text-zinc-300"
-              placeholder="01XXXXXXXX"
-              value={formData.mobile}
-              onChange={(e) => setFormData({...formData, mobile: e.target.value})}
-            />
-          </div>
+        {/* Date of Birth (Optional or based on logic) */}
+        <div className="space-y-2">
+          <label className="block text-sm font-black text-zinc-900 uppercase tracking-widest">Date of Birth</label>
+          <input 
+            type="date"
+            className="w-full bg-white border-2 border-zinc-200 rounded-xl px-6 py-4 focus:border-[#EF4444] outline-none transition-all font-bold text-zinc-900"
+            value={formData.dob}
+            onChange={(e) => setFormData({...formData, dob: e.target.value})}
+          />
         </div>
 
-        <div>
-          <label className="block text-sm font-black text-zinc-900 uppercase tracking-widest mb-2">Identity Proof (IC/Passport)</label>
-          <div className="relative border-2 border-dashed border-zinc-200 rounded-xl p-8 flex flex-col items-center justify-center bg-white hover:bg-zinc-50 transition-all cursor-pointer">
-            <svg className="w-8 h-8 text-[#EF4444] mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-            </svg>
-            <span className="text-xs font-black text-zinc-400 uppercase tracking-widest">Upload Document</span>
-            <input 
-              type="file" 
-              multiple 
-              onChange={handleFileChange}
-              className="absolute inset-0 opacity-0 cursor-pointer" 
-            />
-          </div>
-          
-          {/* File List */}
-          {formData.files.length > 0 && (
-            <div className="mt-4 space-y-2">
-              {formData.files.map((file, index) => (
-                <div key={index} className="flex items-center justify-between bg-white border border-zinc-100 rounded-lg p-3 shadow-sm">
-                  <div className="flex items-center gap-3 overflow-hidden">
-                    <svg className="w-4 h-4 text-[#EF4444] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.414a4 4 0 00-5.656-5.656l-6.415 6.414a6 6 0 108.486 8.486L20.5 13" />
-                    </svg>
-                    <span className="text-xs font-bold text-zinc-600 truncate">{file.name}</span>
-                  </div>
-                  <button 
-                    onClick={() => removeFile(index)}
-                    className="p-1 hover:bg-zinc-100 rounded-full transition-all text-zinc-400 hover:text-[#EF4444]"
-                  >
-                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                  </button>
-                </div>
-              ))}
-            </div>
-          )}
+        {/* Primary Contact */}
+        <div className="space-y-2">
+          <label className="block text-sm font-black text-zinc-900 uppercase tracking-widest">
+            {formData.applicantType === 'BUSINESS' ? 'Contact Mobile No.' : 'Primary Contact'}
+          </label>
+          <input 
+            className="w-full bg-white border-2 border-zinc-200 rounded-xl px-6 py-4 focus:border-[#EF4444] outline-none transition-all font-bold text-zinc-900 placeholder:text-zinc-300"
+            placeholder="01XXXXXXXX"
+            value={formData.mobile}
+            onChange={(e) => setFormData({...formData, mobile: e.target.value})}
+          />
+        </div>
 
-          <p className="mt-2 text-[10px] text-zinc-400 font-bold text-center italic">*Support multiple files (PDF, JPG, PNG)</p>
+        {/* Secondary Contact */}
+        <div className="space-y-2">
+          <label className="block text-sm font-black text-zinc-900 uppercase tracking-widest">Secondary Contact (Optional)</label>
+          <input 
+            className="w-full bg-white border-2 border-zinc-200 rounded-xl px-6 py-4 focus:border-[#EF4444] outline-none transition-all font-bold text-zinc-900 placeholder:text-zinc-300"
+            placeholder="01XXXXXXXX"
+            value={formData.secondaryMobile}
+            onChange={(e) => setFormData({...formData, secondaryMobile: e.target.value})}
+          />
+        </div>
+
+        {/* Emergency Contact */}
+        <div className="space-y-2">
+          <label className="block text-sm font-black text-zinc-900 uppercase tracking-widest">Emergency Contact (Optional)</label>
+          <input 
+            className="w-full bg-white border-2 border-zinc-200 rounded-xl px-6 py-4 focus:border-[#EF4444] outline-none transition-all font-bold text-zinc-900 placeholder:text-zinc-300"
+            placeholder="01XXXXXXXX"
+            value={formData.emergencyMobile}
+            onChange={(e) => setFormData({...formData, emergencyMobile: e.target.value})}
+          />
         </div>
       </div>
 
-      <div className="md:col-span-2 flex flex-col items-center gap-8 mt-12">
-        <label className="flex items-center gap-4 cursor-pointer group">
+      {/* Company Details (Only for Business) */}
+      {formData.applicantType === 'BUSINESS' && (
+        <div className="pt-8 border-t-2 border-zinc-100">
+          <h4 className="text-xl font-black text-zinc-900 uppercase tracking-widest mb-8 text-center">Company Details</h4>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="space-y-2">
+              <label className="block text-sm font-black text-zinc-900 uppercase tracking-widest">Company Registration No.</label>
+              <input 
+                className="w-full bg-white border-2 border-zinc-200 rounded-xl px-6 py-4 focus:border-[#EF4444] outline-none transition-all font-bold text-zinc-900"
+                value={formData.companyRegNo}
+                onChange={(e) => setFormData({...formData, companyRegNo: e.target.value})}
+              />
+            </div>
+            <div className="space-y-2">
+              <label className="block text-sm font-black text-zinc-900 uppercase tracking-widest">Trade Name</label>
+              <input 
+                className="w-full bg-white border-2 border-zinc-200 rounded-xl px-6 py-4 focus:border-[#EF4444] outline-none transition-all font-bold text-zinc-900"
+                value={formData.tradeName}
+                onChange={(e) => setFormData({...formData, tradeName: e.target.value})}
+              />
+            </div>
+            <div className="space-y-2">
+              <label className="block text-sm font-black text-zinc-900 uppercase tracking-widest">2nd Finance Contact Name (Optional)</label>
+              <input 
+                className="w-full bg-white border-2 border-zinc-200 rounded-xl px-6 py-4 focus:border-[#EF4444] outline-none transition-all font-bold text-zinc-900"
+                value={formData.financeContactName}
+                onChange={(e) => setFormData({...formData, financeContactName: e.target.value})}
+              />
+            </div>
+            <div className="space-y-2">
+              <label className="block text-sm font-black text-zinc-900 uppercase tracking-widest">2nd Finance Contact Mobile No (Optional)</label>
+              <input 
+                className="w-full bg-white border-2 border-zinc-200 rounded-xl px-6 py-4 focus:border-[#EF4444] outline-none transition-all font-bold text-zinc-900"
+                placeholder="01XXXXXXXX"
+                value={formData.financeContactMobile}
+                onChange={(e) => setFormData({...formData, financeContactMobile: e.target.value})}
+              />
+            </div>
+            <div className="space-y-2 md:col-span-2">
+              <label className="block text-sm font-black text-zinc-900 uppercase tracking-widest">2nd Finance Contact Email (Optional)</label>
+              <input 
+                className="w-full bg-white border-2 border-zinc-200 rounded-xl px-6 py-4 focus:border-[#EF4444] outline-none transition-all font-bold text-zinc-900"
+                placeholder="example@mail.com"
+                value={formData.financeContactEmail}
+                onChange={(e) => setFormData({...formData, financeContactEmail: e.target.value})}
+              />
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Other Details */}
+      <div className="pt-8 border-t-2 border-zinc-100">
+        <h4 className="text-xl font-black text-zinc-900 uppercase tracking-widest mb-8 text-center">Other Details</h4>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="space-y-2">
+            <label className="block text-sm font-black text-zinc-900 uppercase tracking-widest">Remarks (Optional)</label>
+            <input 
+              className="w-full bg-white border-2 border-zinc-200 rounded-xl px-6 py-4 focus:border-[#EF4444] outline-none transition-all font-bold text-zinc-900"
+              value={formData.remarks}
+              onChange={(e) => setFormData({...formData, remarks: e.target.value})}
+            />
+          </div>
+          <div className="space-y-2">
+            <label className="block text-sm font-black text-zinc-900 uppercase tracking-widest">Promo Code (Optional)</label>
+            <input 
+              className="w-full bg-white border-2 border-zinc-200 rounded-xl px-6 py-4 focus:border-[#EF4444] outline-none transition-all font-bold text-zinc-900"
+              value={formData.promoCode}
+              onChange={(e) => setFormData({...formData, promoCode: e.target.value})}
+            />
+          </div>
+          <div className="space-y-2">
+            <label className="block text-sm font-black text-zinc-900 uppercase tracking-widest">Which Telco Switching From</label>
+            <select 
+              className="w-full bg-white border-2 border-zinc-200 rounded-xl px-6 py-4 focus:border-[#EF4444] outline-none transition-all font-bold text-zinc-900 appearance-none"
+              value={formData.telcoProvider}
+              onChange={(e) => setFormData({...formData, telcoProvider: e.target.value})}
+            >
+              <option value="">--- Select a Telco ---</option>
+              {TELCO_PROVIDERS.map(telco => (
+                <option key={telco.value} value={telco.value}>{telco.label}</option>
+              ))}
+            </select>
+          </div>
+        </div>
+      </div>
+
+      {/* Attachments */}
+      <div className="pt-8 border-t-2 border-zinc-100 space-y-8">
+        <h4 className="text-xl font-black text-zinc-900 uppercase tracking-widest text-center">Attachments</h4>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <FileUploadField 
+            label={formData.nationality === 'MALAYSIAN' ? "Scanned IC Copy" : "Passport Copy"}
+            file={formData.icFile}
+            onChange={(e) => handleFileChange('icFile', e)}
+          />
+
+          {formData.applicantType === 'BUSINESS' && (
+            <FileUploadField 
+              label="SSM Documents"
+              file={formData.ssmFile}
+              onChange={(e) => handleFileChange('ssmFile', e)}
+            />
+          )}
+
+          
+
+          {formData.isTenant && (
+            <>
+              <FileUploadField 
+                label="S&P 1st pg / VP Letter / Utility Bill"
+                file={formData.vpLetterFile}
+                onChange={(e) => handleFileChange('vpLetterFile', e)}
+              />
+              <FileUploadField 
+                label="Tenancy Agreement"
+                file={formData.tenancyAgreementFile}
+                onChange={(e) => handleFileChange('tenancyAgreementFile', e)}
+              />
+              <FileUploadField 
+                label="Letter of Authorization"
+                file={formData.authLetterFile}
+                onChange={(e) => handleFileChange('authLetterFile', e)}
+              />
+              <FileUploadField 
+                label="Yours and Owner's IC/Passport Copy"
+                files={formData.ownerTenantFiles}
+                multiple
+                onChange={(e) => handleFileChange('ownerTenantFiles', e)}
+              />
+            </>
+          )}
+
+          <FileUploadField 
+            label="Additional Document (Optional)"
+            file={formData.additionalFile}
+            onChange={(e) => handleFileChange('additionalFile', e)}
+          />
+
+          <FileUploadField 
+            label="Payment Slip (Optional)"
+            file={formData.paymentSlipFile}
+            onChange={(e) => handleFileChange('paymentSlipFile', e)}
+          />
+
+          <FileUploadField 
+            label="Agent Code (Optional)"
+            isInput
+            value={formData.agentCode}
+            onChangeInput={(val) => setFormData({...formData, agentCode: val})}
+          />
+
+          <FileUploadField 
+            label="Application Form"
+            file={formData.applicationFormFile}
+            onChange={(e) => handleFileChange('applicationFormFile', e)}
+          />
+        </div>
+      </div>
+
+      {/* Terms and Navigation */}
+      <div className="pt-12 space-y-8">
+        <div className="flex items-center justify-center gap-4">
           <input 
             type="checkbox" 
-            className="w-6 h-6 rounded-md border-2 border-zinc-200 text-[#EF4444] focus:ring-[#EF4444]"
+            id="terms"
+            className="w-6 h-6 rounded accent-[#EF4444] cursor-pointer"
             checked={formData.termsAgreed}
             onChange={(e) => setFormData({...formData, termsAgreed: e.target.checked})}
           />
-          <span className="text-sm font-bold text-zinc-600 group-hover:text-zinc-900 transition-all">
-            I read and agree with the <a href="#" className="text-[#EF4444] underline uppercase tracking-widest text-xs">Terms & Conditions</a>
-          </span>
-        </label>
-        <div className="flex gap-4 w-full justify-center">
-          <button onClick={onPrev} className="flex-1 max-w-[200px] border-2 border-zinc-200 py-4 rounded-xl font-black text-zinc-400 hover:bg-white transition-all">PREV</button>
+          <label htmlFor="terms" className="text-sm sm:text-base font-bold text-zinc-900 cursor-pointer">
+            I read and agree with the <a href="https://freshtel.my/web/content/652099?download=true" target="_blank" className="text-[#EF4444] underline">Terms & Conditions</a> as required by Freshtel.
+          </label>
+        </div>
+
+        <div className="flex flex-col sm:flex-row gap-4">
           <button 
-            onClick={onNext} 
+            onClick={onPrev}
+            className="flex-1 py-5 rounded-2xl font-black text-sm tracking-[0.2em] transition-all bg-white border-2 border-zinc-200 text-zinc-400 hover:border-zinc-900 hover:text-zinc-900"
+          >
+            PREV
+          </button>
+          <button 
+            onClick={onNext}
             disabled={!isStep2Valid}
-            className={`flex-1 max-w-[200px] py-4 rounded-xl font-black shadow-lg transition-all ${
-              isStep2Valid ? 'bg-[#EF4444] text-white hover:bg-red-600' : 'bg-zinc-200 text-zinc-400 cursor-not-allowed opacity-50'
+            className={`flex-1 py-5 rounded-2xl font-black text-sm tracking-[0.2em] transition-all ${
+              isStep2Valid 
+                ? 'bg-[#EF4444] text-white shadow-xl hover:bg-zinc-900' 
+                : 'bg-zinc-100 text-zinc-300 cursor-not-allowed'
             }`}
           >
             NEXT
           </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+interface FileUploadFieldProps {
+  label: string;
+  file?: File | null;
+  files?: File[];
+  multiple?: boolean;
+  isInput?: boolean;
+  value?: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChangeInput?: (val: string) => void;
+}
+
+function FileUploadField({ label, file, files, multiple, isInput, value, onChange, onChangeInput }: FileUploadFieldProps) {
+  if (isInput) {
+    return (
+      <div className="space-y-2">
+        <label className="block text-xs font-black text-zinc-400 uppercase tracking-widest">{label}</label>
+        <input 
+          className="w-full bg-white border-2 border-zinc-200 rounded-xl px-4 py-3 focus:border-[#EF4444] outline-none transition-all font-bold text-zinc-900"
+          value={value}
+          onChange={(e) => onChangeInput?.(e.target.value)}
+        />
+      </div>
+    );
+  }
+
+  return (
+    <div className="space-y-2">
+      <label className="block text-xs font-black text-zinc-400 uppercase tracking-widest">{label}</label>
+      <div className="relative group">
+        <input 
+          type="file" 
+          multiple={multiple}
+          className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
+          onChange={onChange}
+          accept="application/pdf,image/jpg,image/jpeg,image/png"
+        />
+        <div className="bg-white border-2 border-zinc-200 rounded-xl p-4 flex items-center gap-4 group-hover:border-zinc-300 transition-all">
+          <div className="w-10 h-10 rounded-lg bg-zinc-50 flex items-center justify-center text-zinc-400 group-hover:text-[#EF4444] transition-all">
+            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+            </svg>
+          </div>
+          <div className="flex-1 min-w-0">
+            <p className="text-sm font-bold text-zinc-900 truncate">
+              {multiple 
+                ? (files?.length ? `${files.length} files selected` : "Add Attachments")
+                : (file ? file.name : "Select File")
+              }
+            </p>
+            <p className="text-[10px] font-black text-zinc-400 uppercase tracking-widest">
+              {multiple ? "* Allow multiple files" : "* Support a single file only"}
+            </p>
+          </div>
         </div>
       </div>
     </div>
@@ -926,14 +1241,18 @@ function Step4Preview({ formData, onPrev }: Pick<StepProps, 'formData' | 'onPrev
           <Section title="Contract Period" value={contractPeriod} />
           <Section title="Applicant Type" value={formData.applicantType} />
           <Section title="NRIC / Passport" value={formData.nricPassport || '-'} />
+          <Section title="Email" value={formData.email || '-'} />
+          <Section title="Primary Contact" value={formData.mobile || '-'} />
           <div>
-            <p className="text-[10px] font-black text-zinc-400 uppercase tracking-widest mb-1">Identity Proof</p>
+            <p className="text-[10px] font-black text-zinc-400 uppercase tracking-widest mb-1">Identity Proof & Documents</p>
             <div className="flex flex-wrap gap-2">
-              {formData.files.length > 0 ? (
-                formData.files.map((file, i) => (
-                  <span key={i} className="text-xs font-bold text-[#EF4444] bg-white border border-zinc-100 px-3 py-1.5 rounded-lg shadow-sm">{file.name}</span>
-                ))
-              ) : (
+              {[formData.icFile, formData.ssmFile, formData.spaFile, formData.vpLetterFile, formData.tenancyAgreementFile, formData.authLetterFile, ...(formData.ownerTenantFiles || []), formData.additionalFile, formData.paymentSlipFile, formData.applicationFormFile].filter(Boolean).map((file, i) => (
+                <span key={i} className="text-xs font-bold text-[#EF4444] bg-white border border-zinc-100 px-3 py-1.5 rounded-lg shadow-sm">{file!.name}</span>
+              ))}
+              {formData.files.map((file, i) => (
+                <span key={`old-${i}`} className="text-xs font-bold text-[#EF4444] bg-white border border-zinc-100 px-3 py-1.5 rounded-lg shadow-sm">{file.name}</span>
+              ))}
+              {!formData.icFile && !formData.files.length && (
                 <p className="text-lg font-black text-zinc-900 leading-tight">-</p>
               )}
             </div>
