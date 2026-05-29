@@ -3,14 +3,14 @@ import Link from "next/link";
 export default function TermsAndConditions() {
   return (
     <section className="bg-white py-12 px-4 md:px-24">
-      <div className="max-w-4xl mx-auto bg-[#FBF5EF] p-8 md:p-10 rounded-[20px] shadow-md border border-zinc-100 animate-in fade-in slide-in-from-bottom-4 duration-700">
-        <h2 className="font-bold text-xl text-center text-black mb-6 uppercase tracking-wide">
+      <div className="max-w-4xl mx-auto bg-[#FBF5EF] p-6 sm:p-8 md:p-10 rounded-2xl md:rounded-[20px] shadow-md border border-zinc-100 animate-in fade-in slide-in-from-bottom-4 duration-700">
+        <h2 className="font-bold text-lg md:text-xl text-center text-black mb-6 uppercase tracking-wide">
           Terms & Condition
         </h2>
         
         <div className="h-px bg-zinc-200 mb-6"></div>
         
-        <ol className="list-decimal list-outside space-y-4 ml-6 text-zinc-900">
+        <ol className="list-decimal list-outside space-y-4 ml-4 sm:ml-6 text-zinc-900 text-sm md:text-base">
           <li className="pl-2">
             <span className="font-bold">Complimentary mesh router</span> is only available in <span className="font-bold">30-months contract</span> with <span className="font-bold">300 Mbps subscription plan</span>.
           </li>

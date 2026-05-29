@@ -7,16 +7,16 @@ export default function Home() {
   return (
     <main className="flex flex-col min-h-screen relative">
       {/* Hero Section */}
-      <section className="relative bg-[#FFF4F4] px-4 md:px-40 pt-12 pb-32 md:pt-24 md:pb-48 flex flex-col md:flex-row items-center overflow-hidden uppercase font-sans">
+      <section className="relative bg-[#FFF4F4] px-6 lg:px-40 pt-12 pb-32 md:pt-24 md:pb-48 flex flex-col md:flex-row items-center overflow-hidden uppercase font-sans">
         {/* Background Sketch Pattern - approximated by a simple SVG pattern */}
         <div className="absolute inset-0 opacity-[0.05] pointer-events-none" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 10l20 20M80 10l-10 10M50 50l15 5M20 80l10-5' stroke='%23EF4444' stroke-width='1' fill='none'/%3E%3C/svg%3E")` }}></div>
         
-        <div className="flex-1 z-10">
-          <h1 className="text-[#1B365D] text-5xl md:text-6xl font-black mb-4 leading-tight tracking-tight">
+        <div className="flex-1 z-10 text-center md:text-left">
+          <h1 className="text-[#1B365D] text-4xl sm:text-5xl md:text-6xl font-black mb-4 leading-tight tracking-tight">
             NON STOP<br />
             STREAMING <span className="text-[#3B82F6]"> 24/7</span>
           </h1>
-          <p className="text-zinc-600 text-lg md:text-xl max-w-lg mb-8 normal-case font-medium">
+          <p className="text-zinc-600 text-lg md:text-xl max-w-lg mb-8 normal-case font-medium mx-auto md:mx-0">
             Get a whole year of reliable, high-speed internet with our 100Mbps plan.
           </p>
           <Link 
@@ -27,9 +27,9 @@ export default function Home() {
           </Link>
         </div>
         
-        <div className="flex-1 mt-12 md:mt-0 relative flex justify-center items-center z-10">
+        <div className="flex-1 mt-12 md:mt-0 relative flex justify-center items-center z-10 w-full max-w-lg md:max-w-none">
             {/* Main content image */}
-            <div className="relative w-full aspect-[4/3] max-w-xl rounded-b-[5rem] rounded-tl-[5rem] rounded-tr-[2rem] overflow-hidden shadow-2xl border-b-[12px] border-white">
+            <div className="relative w-full aspect-[4/3] rounded-b-[3rem] md:rounded-b-[5rem] rounded-tl-[3rem] md:rounded-tl-[5rem] rounded-tr-[1.5rem] md:rounded-tr-[2rem] overflow-hidden shadow-2xl border-b-[8px] md:border-b-[12px] border-white">
                 <Image 
                   src="/images/hero-family.jpg"
                   alt="Family enjoying high-speed internet"
@@ -40,7 +40,7 @@ export default function Home() {
             </div>
             
             {/* Background text decoration */}
-            <div className="absolute -bottom-10 -right-10 opacity-[0.05] select-none text-[12rem] font-black pointer-events-none">
+            <div className="absolute -bottom-10 -right-10 opacity-[0.05] select-none text-[8rem] md:text-[12rem] font-black pointer-events-none hidden sm:block">
               SHARE
             </div>
         </div>
@@ -48,8 +48,8 @@ export default function Home() {
 
       {/* Feature Icons Section - Floating Half-way */}
       <section className="relative z-30">
-        <div className="max-w-7xl mx-auto w-full px-4 md:px-24 -mt-16">
-          <div className="bg-white rounded-3xl p-8 shadow-2xl flex flex-wrap justify-between items-center gap-6 border border-zinc-100">
+        <div className="max-w-7xl mx-auto w-full px-4 md:px-24 -mt-16 md:-mt-16">
+          <div className="bg-white rounded-3xl p-6 md:p-8 shadow-2xl grid grid-cols-2 md:grid-cols-3 lg:flex lg:flex-wrap lg:justify-between items-center gap-4 md:gap-6 border border-zinc-100">
              <FeatureItem icon={<SignalIcon />} title="Maximum Coverage" />
              <FeatureItem icon={<UsersIcon />} title="Stable Connection" />
              <FeatureItem icon={<MagicIcon />} title="Flexible" />

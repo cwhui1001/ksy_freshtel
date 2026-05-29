@@ -2,90 +2,90 @@ import React from 'react';
 
 export default function TermsAndConditions() {
   return (
-    <main className="flex-grow bg-white pt-24 pb-16">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <main className="flex-grow bg-white pt-28 pb-16">
+      <div className="max-w-4xl mx-auto px-6 lg:px-8">
         <div className="row">
-          <h1 className="text-4xl font-extrabold text-[#1B365D] mb-8 border-b-4 border-[#EF4444] pb-2 inline-block">
+          <h1 className="text-3xl md:text-4xl font-extrabold text-[#1B365D] mb-8 border-b-4 border-[#EF4444] pb-2 inline-block">
             Terms & Conditions
           </h1>
           
           <div className="mb-6">
-            <p className="text-zinc-600 leading-relaxed text-lg italic">
+            <p className="text-zinc-600 leading-relaxed text-base md:text-lg italic">
               The use of Freshtel Website is subject to the terms and conditions (&ldquo;T&C&rdquo;) provided herein. By accessing and using Freshtel Website you agree to be bound by this T&C.
             </p>
           </div>
           
           <div className="mb-10">
-            <p className="text-zinc-600 leading-relaxed">
-              From time to time, we make services available via this website or such other website operated by us, such as messaging services and online services (&ldquo;freshtel.my services&rdquo;). These freshtel.my services, and this website, will be collectively referred to as &ldquo;freshtel.my&rdquo; in these Terms of Use.
+            <p className="text-zinc-600 leading-relaxed text-sm md:text-base">
+              From time to time, we make services available via this website or such other website operated by us, such as messaging services and online services (&ldquo;freshtel.online services&rdquo;). These freshtel.online services, and this website, will be collectively referred to as &ldquo;freshtel.online&rdquo; in these Terms of Use.
             </p>
           </div>
           
           <section className="mb-12">
-            <h3 className="text-2xl font-bold text-[#1B365D] mb-6 flex items-center">
-              <span className="w-2 h-8 bg-[#EF4444] mr-4 block"></span>
+            <h3 className="text-xl md:text-2xl font-bold text-[#1B365D] mb-6 flex items-center">
+              <span className="w-2 h-6 md:h-8 bg-[#EF4444] mr-4 block"></span>
               Support and Customer Support
             </h3>
             <ol className="space-y-6">
               <li className="text-zinc-700">
-                <span className="font-bold block mb-3 text-lg">Support and Operation Hours:</span>
+                <span className="font-bold block mb-3 text-base md:text-lg">Support and Operation Hours:</span>
                 <div className="overflow-x-auto rounded-xl border border-zinc-200 mb-4 shadow-sm">
-                  <table className="min-w-full divide-y divide-zinc-200">
+                  <table className="min-w-[500px] w-full divide-y divide-zinc-200">
                     <thead className="bg-[#FFF4F4]">
                       <tr>
-                        <th className="px-6 py-3 text-left text-sm font-bold text-[#1B365D] uppercase tracking-wider">Day</th>
-                        <th className="px-6 py-3 text-left text-sm font-bold text-[#1B365D] uppercase tracking-wider">Operation Hours</th>
-                        <th className="px-6 py-3 text-left text-sm font-bold text-[#1B365D] uppercase tracking-wider">Support Hours</th>
+                        <th className="px-4 md:px-6 py-3 text-left text-xs md:text-sm font-bold text-[#1B365D] uppercase tracking-wider">Day</th>
+                        <th className="px-4 md:px-6 py-3 text-left text-xs md:text-sm font-bold text-[#1B365D] uppercase tracking-wider">Operation Hours</th>
+                        <th className="px-4 md:px-6 py-3 text-left text-xs md:text-sm font-bold text-[#1B365D] uppercase tracking-wider">Support Hours</th>
                       </tr>
                     </thead>
                     <tbody className="bg-white divide-y divide-zinc-200">
                       <tr>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-zinc-600 font-medium">Monday - Friday</td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-zinc-600">9:00 AM - 6:00 PM</td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-zinc-600">9:00 AM - 12:00 AM</td>
+                        <td className="px-4 md:px-6 py-3 md:py-4 whitespace-nowrap text-xs md:text-sm text-zinc-600 font-medium">Monday - Friday</td>
+                        <td className="px-4 md:px-6 py-3 md:py-4 whitespace-nowrap text-xs md:text-sm text-zinc-600">9:00 AM - 6:00 PM</td>
+                        <td className="px-4 md:px-6 py-3 md:py-4 whitespace-nowrap text-xs md:text-sm text-zinc-600">9:00 AM - 12:00 AM</td>
                       </tr>
                       <tr>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-zinc-600 font-medium">Saturday - Sunday</td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-zinc-600 italic">Closed</td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-zinc-600">9:00 AM - 9:00 PM</td>
+                        <td className="px-4 md:px-6 py-3 md:py-4 whitespace-nowrap text-xs md:text-sm text-zinc-600 font-medium">Saturday - Sunday</td>
+                        <td className="px-4 md:px-6 py-3 md:py-4 whitespace-nowrap text-xs md:text-sm text-zinc-600 italic">Closed</td>
+                        <td className="px-4 md:px-6 py-3 md:py-4 whitespace-nowrap text-xs md:text-sm text-zinc-600">9:00 AM - 9:00 PM</td>
                       </tr>
                       <tr>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-zinc-600 font-medium">Public Holiday</td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-zinc-600 italic">Closed</td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-zinc-600">9:00 AM - 9:00 PM</td>
+                        <td className="px-4 md:px-6 py-3 md:py-4 whitespace-nowrap text-xs md:text-sm text-zinc-600 font-medium">Public Holiday</td>
+                        <td className="px-4 md:px-6 py-3 md:py-4 whitespace-nowrap text-xs md:text-sm text-zinc-600 italic">Closed</td>
+                        <td className="px-4 md:px-6 py-3 md:py-4 whitespace-nowrap text-xs md:text-sm text-zinc-600">9:00 AM - 9:00 PM</td>
                       </tr>
                     </tbody>
                   </table>
                 </div>
                 <ul className="bg-zinc-50 p-6 rounded-xl border-l-4 border-[#3B82F6] space-y-2 list-none">
-                  <li className="flex items-center gap-2">
-                    <span className="font-bold min-w-[140px]">Contact Number:</span>
-                    <span className="text-[#3B82F6] font-bold">03-9078 2963</span>
+                  <li className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
+                    <span className="font-bold min-w-[140px] text-sm">Contact Number:</span>
+                    <span className="text-[#3B82F6] font-bold text-sm">03-9078 2963</span>
                   </li>
-                  <li className="flex items-center gap-2">
-                    <span className="font-bold min-w-[140px]">WhatsApp:</span>
-                    <span className="text-[#3B82F6] font-bold">03-9078 2963</span>
+                  <li className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
+                    <span className="font-bold min-w-[140px] text-sm">WhatsApp:</span>
+                    <span className="text-[#3B82F6] font-bold text-sm">03-9078 2963</span>
                   </li>
-                  <li className="flex items-center gap-2">
-                    <span className="font-bold min-w-[140px]">Email:</span>
-                    <span className="text-[#3B82F6] font-bold underline">admin@freshtel.online</span>
+                  <li className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
+                    <span className="font-bold min-w-[140px] text-sm">Email:</span>
+                    <span className="text-[#3B82F6] font-bold underline text-sm">admin@freshtel.online</span>
                   </li>
-                  <li className="mt-2 text-zinc-500 italic">You may also use our Freshtel Internet mobile app or customer portal</li>
+                  <li className="mt-2 text-zinc-500 italic text-xs">You may also use our Freshtel Internet mobile app or customer portal</li>
                 </ul>
               </li>
             </ol>
           </section>
           
           <section className="mb-12">
-            <h3 className="text-2xl font-bold text-[#1B365D] mb-6 flex items-center">
-              <span className="w-2 h-8 bg-[#EF4444] mr-4 block"></span>
+            <h3 className="text-xl md:text-2xl font-bold text-[#1B365D] mb-6 flex items-center">
+              <span className="w-2 h-6 md:h-8 bg-[#EF4444] mr-4 block"></span>
               Registration & Installation
             </h3>
 
-            <ol className="list-decimal ml-6 space-y-6 text-zinc-700">
+            <ol className="list-decimal ml-6 space-y-6 text-zinc-700 text-sm md:text-base">
               <li>
                 <span className="font-medium">Customer has to provide the following information for registration:</span>
-                <ul className="list-disc ml-6 mt-2 grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-1 text-zinc-600 italic">
+                <ul className="list-disc ml-6 mt-2 grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-1 text-zinc-600 italic text-sm">
                   <li>Name</li>
                   <li>Identity (NRIC, Passport)</li>
                   <li>Nationality</li>
@@ -398,7 +398,7 @@ export default function TermsAndConditions() {
                 Liable for all costs and expenses that Freshtel Internet incurs, including the cost and expenses for the aborted appointment. Or the customer to return the equipment, which shall be determined at the following address:
                 <div className="bg-zinc-50 p-6 rounded-xl border border-zinc-200 mt-4 not-italic">
                    <p className="font-bold text-[#1B365D]">Lot 11, 2nd Floor Retail,<br />Millerz Square @ Old Klang Road,<br />No. 357, Jalan Kelang Lama,<br />57000 Kuala Lumpur.</p>
-                   <p className="mt-4 text-zinc-600">Customer Support: <span className="font-bold">03-9078 2963</span>; <a href="mailto:support@freshtel.my" className="text-[#3B82F6] underline font-medium">support@freshtel.my</a>.</p>
+                   <p className="mt-4 text-zinc-600">Customer Support: <span className="font-bold">03-9078 2963</span>; <a href="mailto:admin@freshtel.online" className="text-[#3B82F6] underline font-medium">admin@freshtel.online</a>.</p>
                 </div>
               </li>
               <li>
@@ -578,7 +578,7 @@ export default function TermsAndConditions() {
               <li>Continued Efforts: Freshtel Internet continuously works to ensure that the Freshtel Internet network and services provide optimal connectivity and access. Freshtel Internet appreciates your understanding and patience in instances where issues with third-party websites or services impact your experience.</li>
               <li>Violation of Policy: If internet service users violate this policy, Freshtel Internet reserves the right to take action, which may include managing customers&rsquo; bandwidth, suspending, or terminating the service. Freshtel Internet will exercise discretion in determining the appropriate response.</li>
               <li>Reconnection Fee: Should Freshtel Internet choose to reconnect a customer&rsquo;s service, a reconnection fee may apply to reactivate it.</li>
-              <li>Reporting Unacceptable Use: If internet service users encounter any illegal, unlawful, or unacceptable use of our services, please call 03-9078 2963 or email <a href="mailto:support@freshtel.my" className="text-[#3B82F6] underline">support@freshtel.my</a>.</li>
+              <li>Reporting Unacceptable Use: If internet service users encounter any illegal, unlawful, or unacceptable use of our services, please call 03-9078 2963 or email <a href="mailto:admin@freshtel.online" className="text-[#3B82F6] underline">admin@freshtel.online</a>.</li>
               <li>User Responsibility and Risk: Users accessing websites via the internet service do so at their own risk.</li>
               <li>Malicious Software and Cyberattacks: If a user&rsquo;s laptops, personal computers, smartphones, or other access equipment become infected with malicious software that allows a third party to launch a distributed denial of service attack or other cyberattacks using the Fibre Internet Service, and if such an attack compromises or affects Freshtel Internet&rsquo;s network, Freshtel Internet will immediately suspend the user&rsquo;s internet service.</li>
               <li>Mitigating Precautions: Users are responsible for taking reasonable precautions to mitigate against such possibilities. Installing current and updated anti-virus software is essential to prevent such incidents.</li>
