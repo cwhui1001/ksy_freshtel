@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import PlansSection from "@/components/PlansSection";
+import WinbackPromoSection from "@/components/WinbackPromoSection";
 import TermsAndConditions from "@/components/TermsAndConditions";
 
 export default function Home() {
@@ -58,6 +59,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Winback Promo Section */}
+      <WinbackPromoSection />
 
       {/* Plans Section */}
       <PlansSection />

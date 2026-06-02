@@ -21,6 +21,14 @@ const DEFAULT_PLANS: { RESIDENTIAL: Plan[] } = {
   ]
 };
 
+const WINBACK_PLANS: { RESIDENTIAL: Plan[] } = {
+  RESIDENTIAL: [
+    { label: "Winback 300 Mbps", value: "wb_300", contracts: [{ value: 36, price: "44.50" }] },
+    { label: "Winback 500 Mbps", value: "wb_500", contracts: [{ value: 36, price: "54.50" }] },
+    { label: "Winback 1 Gbps", value: "wb_1g", contracts: [{ value: 36, price: "79.50" }] }
+  ]
+};
+
 const LOCATIONS = [
   { name: "168 Park Selayang", street: "Jalan Kuching", city: "Batu Caves", zip: "68100", state: "Selangor", user: true },
   { name: "188 Suites", street: "Jalan Sultan Ismail, City Centre", city: "Kuala Lumpur", zip: "50250", state: "Wilayah Persekutuan Kuala Lumpur", user: true },
@@ -388,6 +396,7 @@ interface LocationData {
 interface FormData {
   location: string;
   applicantType: string;
+  planType: 'GENERAL' | 'WINBACK';
   plan: string;
   contract: number;
   contractPrice: string;
@@ -436,6 +445,7 @@ export default function SignupPage() {
   const [formData, setFormData] = useState<FormData>({
     location: '',
     applicantType: 'RESIDENTIAL',
+    planType: 'GENERAL',
     plan: '',
     contract: 0,
     contractPrice: '',
@@ -473,6 +483,7 @@ export default function SignupPage() {
     ].filter(Boolean).join('%0A');
 
     const message = `*FreshTel New Subscription*%0A%0A` +
+      `*PLAN TYPE:* ${formData.planType === 'WINBACK' ? 'Winback Switching Campaign' : 'General Plan'}%0A` +
       `*PLAN:* ${formData.plan.toUpperCase().replace('_', ' ')}%0A` +
       `*CONTRACT:* ${formData.contract === 0 ? 'No Contract' : formData.contract + ' Months'}%0A` +
       `*PRICE:* RM ${formData.contractPrice}/mo%0A%0A` +
@@ -630,6 +641,32 @@ function Step1Plan({ formData, setFormData, onNext }: StepProps) {
         </div>
 
         <div>
+          <label className="block text-xs md:text-sm font-black text-zinc-900 uppercase tracking-widest mb-2">Plan Type</label>
+          <div className="grid grid-cols-2 gap-3 sm:gap-4 mb-4">
+            <button
+              onClick={() => setFormData({ ...formData, planType: 'GENERAL', plan: '', contract: 0, contractPrice: '' })}
+              className={`p-4 rounded-xl border-2 transition-all text-center font-black text-sm md:text-base cursor-pointer ${
+                formData.planType === 'GENERAL'
+                  ? 'border-[#EF4444] bg-red-50 text-[#EF4444] shadow-md shadow-red-100'
+                  : 'border-zinc-300 bg-white text-zinc-500 hover:border-zinc-400'
+              }`}
+            >
+              General Plan
+            </button>
+            <button
+              onClick={() => setFormData({ ...formData, planType: 'WINBACK', plan: '', contract: 0, contractPrice: '' })}
+              className={`p-4 rounded-xl border-2 transition-all text-center font-black text-sm md:text-base cursor-pointer ${
+                formData.planType === 'WINBACK'
+                  ? 'border-[#EF4444] bg-red-50 text-[#EF4444] shadow-md shadow-red-100'
+                  : 'border-zinc-300 bg-white text-zinc-500 hover:border-zinc-400'
+              }`}
+            >
+              Win-back Campaign
+            </button>
+          </div>
+        </div>
+
+        <div>
           <label className="block text-xs md:text-sm font-black text-zinc-900 uppercase tracking-widest mb-2">Choose Your Plan</label>
           <select 
             className="w-full bg-white border-2 border-zinc-300 rounded-xl px-5 py-3.5 md:px-6 md:py-4 focus:border-[#EF4444] outline-none transition-all font-bold appearance-none text-zinc-900 text-sm md:text-base cursor-pointer"
@@ -639,9 +676,11 @@ function Step1Plan({ formData, setFormData, onNext }: StepProps) {
             <option value="">--Select Internet Package--</option>
             {(() => {
               const locationData = (LOCATIONS as LocationData[]).find(l => l.name === formData.location);
-              let plans = locationData?.plans.RESIDENTIAL || [];
+              let plans = formData.planType === 'WINBACK'
+                ? WINBACK_PLANS.RESIDENTIAL
+                : (locationData?.plans.RESIDENTIAL || []);
               if (plans.length === 0) {
-                plans = DEFAULT_PLANS.RESIDENTIAL;
+                plans = formData.planType === 'WINBACK' ? WINBACK_PLANS.RESIDENTIAL : DEFAULT_PLANS.RESIDENTIAL;
               }
               return plans.map(p => (
                 <option key={p.value} value={p.value} className="font-bold">{p.label}</option>
@@ -656,9 +695,11 @@ function Step1Plan({ formData, setFormData, onNext }: StepProps) {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4">
               {(() => {
                 const locationData = (LOCATIONS as LocationData[]).find(l => l.name === formData.location);
-                let plans = locationData?.plans.RESIDENTIAL || [];
+                let plans = formData.planType === 'WINBACK'
+                  ? WINBACK_PLANS.RESIDENTIAL
+                  : (locationData?.plans.RESIDENTIAL || []);
                 if (plans.length === 0) {
-                  plans = DEFAULT_PLANS.RESIDENTIAL;
+                  plans = formData.planType === 'WINBACK' ? WINBACK_PLANS.RESIDENTIAL : DEFAULT_PLANS.RESIDENTIAL;
                 }
                 const planData = plans.find(p => p.value === formData.plan);
                 return planData?.contracts.map(c => (
@@ -672,11 +713,40 @@ function Step1Plan({ formData, setFormData, onNext }: StepProps) {
                     }`}
                   >
                     <div className="text-base md:text-lg font-black">{c.label || c.value}</div>
-                    <div className="text-[10px] font-bold uppercase tracking-widest">RM {c.price}.00</div>
+                    <div className="text-[10px] font-bold uppercase tracking-widest">
+                      RM {c.price}{c.price.includes('.') ? '' : '.00'}
+                    </div>
                   </button>
                 ));
               })()}
             </div>
+            {formData.planType === 'WINBACK' && (
+              <div className="mt-4 bg-red-50/60 border border-red-100 rounded-xl p-4 text-[11px] font-bold text-red-600 flex flex-col gap-1.5 shadow-sm">
+                <div className="flex items-center gap-1.5 uppercase tracking-wider text-xs">
+                  <span>💡</span> Campaign Special Win-back Promo:
+                </div>
+                <div className="ml-5 font-semibold text-zinc-700 flex flex-col gap-1">
+                  {formData.plan === 'wb_300' && (
+                    <>
+                      <div>• Plan: <span className="font-extrabold text-zinc-900">300Mbps</span> (36 Months Loyalty Switching Promo)</div>
+                      <div>• Pricing: <span className="font-extrabold text-[#EF4444]">RM 44.50/mth</span> for 1st 12 months, followed by <span className="font-extrabold text-zinc-950">RM 89.00/mth</span> for the remaining 24 months.</div>
+                    </>
+                  )}
+                  {formData.plan === 'wb_500' && (
+                    <>
+                      <div>• Plan: <span className="font-extrabold text-zinc-900">500Mbps</span> (36 Months Loyalty Switching Promo)</div>
+                      <div>• Pricing: <span className="font-extrabold text-[#EF4444]">RM 54.50/mth</span> for 1st 12 months, followed by <span className="font-extrabold text-zinc-950">RM 109.00/mth</span> for the remaining 24 months.</div>
+                    </>
+                  )}
+                  {formData.plan === 'wb_1g' && (
+                    <>
+                      <div>• Plan: <span className="font-extrabold text-zinc-900">1Gbps</span> (36 Months Loyalty Switching Promo)</div>
+                      <div>• Pricing: <span className="font-extrabold text-[#EF4444]">RM 79.50/mth</span> for 1st 12 months, followed by <span className="font-extrabold text-zinc-950">RM 159.00/mth</span> for the remaining 24 months.</div>
+                    </>
+                  )}
+                </div>
+              </div>
+            )}
             <div className="mt-4 space-y-2">
               <p className="text-[10px] font-bold text-zinc-400 italic">* All prices shown are inclusive of 6% SST.</p>
               <div className="flex gap-2 items-start bg-zinc-100/50 p-3 rounded-lg">
