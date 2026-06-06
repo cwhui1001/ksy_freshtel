@@ -530,7 +530,7 @@ export default function SignupPage() {
     }
 
     // Open WhatsApp
-    window.open(`https://wa.me/601135503022?text=${message}`, '_blank');
+    window.open(`https://wa.me/601127429188?text=${message}`, '_blank');
   };
 
   const nextStep = () => {

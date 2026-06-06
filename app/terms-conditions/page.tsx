@@ -60,11 +60,11 @@ export default function TermsAndConditions() {
                 <ul className="bg-zinc-50 p-6 rounded-xl border-l-4 border-[#3B82F6] space-y-2 list-none">
                   <li className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
                     <span className="font-bold min-w-[140px] text-sm">Contact Number:</span>
-                    <span className="text-[#3B82F6] font-bold text-sm">03-9078 2963</span>
+                    <span className="text-[#3B82F6] font-bold text-sm">+60 11-2742 9188</span>
                   </li>
                   <li className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
                     <span className="font-bold min-w-[140px] text-sm">WhatsApp:</span>
-                    <span className="text-[#3B82F6] font-bold text-sm">03-9078 2963</span>
+                    <span className="text-[#3B82F6] font-bold text-sm">+60 11-2742 9188</span>
                   </li>
                   <li className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
                     <span className="font-bold min-w-[140px] text-sm">Email:</span>
@@ -398,7 +398,7 @@ export default function TermsAndConditions() {
                 Liable for all costs and expenses that Freshtel Internet incurs, including the cost and expenses for the aborted appointment. Or the customer to return the equipment, which shall be determined at the following address:
                 <div className="bg-zinc-50 p-6 rounded-xl border border-zinc-200 mt-4 not-italic">
                    <p className="font-bold text-[#1B365D]">Lot 11, 2nd Floor Retail,<br />Millerz Square @ Old Klang Road,<br />No. 357, Jalan Kelang Lama,<br />57000 Kuala Lumpur.</p>
-                   <p className="mt-4 text-zinc-600">Customer Support: <span className="font-bold">03-9078 2963</span>; <a href="mailto:admin@freshtel.online" className="text-[#3B82F6] underline font-medium">admin@freshtel.online</a>.</p>
+                   <p className="mt-4 text-zinc-600">Customer Support: <span className="font-bold">+60 11-2742 9188</span>; <a href="mailto:admin@freshtel.online" className="text-[#3B82F6] underline font-medium">admin@freshtel.online</a>.</p>
                 </div>
               </li>
               <li>
@@ -578,7 +578,7 @@ export default function TermsAndConditions() {
               <li>Continued Efforts: Freshtel Internet continuously works to ensure that the Freshtel Internet network and services provide optimal connectivity and access. Freshtel Internet appreciates your understanding and patience in instances where issues with third-party websites or services impact your experience.</li>
               <li>Violation of Policy: If internet service users violate this policy, Freshtel Internet reserves the right to take action, which may include managing customers&rsquo; bandwidth, suspending, or terminating the service. Freshtel Internet will exercise discretion in determining the appropriate response.</li>
               <li>Reconnection Fee: Should Freshtel Internet choose to reconnect a customer&rsquo;s service, a reconnection fee may apply to reactivate it.</li>
-              <li>Reporting Unacceptable Use: If internet service users encounter any illegal, unlawful, or unacceptable use of our services, please call 03-9078 2963 or email <a href="mailto:admin@freshtel.online" className="text-[#3B82F6] underline">admin@freshtel.online</a>.</li>
+              <li>Reporting Unacceptable Use: If internet service users encounter any illegal, unlawful, or unacceptable use of our services, please call +60 11-2742 9188 or email <a href="mailto:admin@freshtel.online" className="text-[#3B82F6] underline">admin@freshtel.online</a>.</li>
               <li>User Responsibility and Risk: Users accessing websites via the internet service do so at their own risk.</li>
               <li>Malicious Software and Cyberattacks: If a user&rsquo;s laptops, personal computers, smartphones, or other access equipment become infected with malicious software that allows a third party to launch a distributed denial of service attack or other cyberattacks using the Fibre Internet Service, and if such an attack compromises or affects Freshtel Internet&rsquo;s network, Freshtel Internet will immediately suspend the user&rsquo;s internet service.</li>
               <li>Mitigating Precautions: Users are responsible for taking reasonable precautions to mitigate against such possibilities. Installing current and updated anti-virus software is essential to prevent such incidents.</li>

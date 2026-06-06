@@ -121,7 +121,7 @@ export default function AboutUsPage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 
-                <a href="https://wa.me/601135503022" target="_blank" className="px-10 py-5 bg-[#DCC7AA] text-white rounded-full font-black text-sm uppercase tracking-widest hover:scale-105 transition-all shadow-lg">
+                <a href="https://wa.me/601127429188" target="_blank" className="px-10 py-5 bg-[#DCC7AA] text-white rounded-full font-black text-sm uppercase tracking-widest hover:scale-105 transition-all shadow-lg">
                     WhatsApp Us
                 </a>
             </div>

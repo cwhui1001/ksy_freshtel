@@ -95,7 +95,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 <td style='background-color: #1a1a1a; padding: 40px; text-align: center;'>
                     <div style='color: #ffffff; font-size: 14px; font-weight: 700; margin-bottom: 15px;'>Need assistance?</div>
                     <div style='font-size: 12px; color: #94a3b8; line-height: 2;'>
-                        <a href='tel:0390782963' style='color: #EF4444; text-decoration: none; font-weight: 700;'>03-9078 2963</a> • 
+                        <a href='tel:+601127429188' style='color: #EF4444; text-decoration: none; font-weight: 700;'>+60 11-2742 9188</a> • 
                         <a href='mailto:admin@freshtel.online' style='color: #EF4444; text-decoration: none; font-weight: 700;'>admin@freshtel.online</a><br>
                         <span style='color: #4b5563; text-transform: uppercase; letter-spacing: 1px;'>Freshtel Internet Sdn Bhd</span><br>
                         &copy; " . date('Y') . " All rights reserved.

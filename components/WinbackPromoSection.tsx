@@ -41,7 +41,7 @@ const PROMO_PLANS: PromoPlan[] = [
 ];
 
 export default function WinbackPromoSection() {
-  const whatsappNumber = '601135503022';
+  const whatsappNumber = '601127429188';
 
   return (
     <section id="winback" className="py-16 md:py-24 bg-gradient-to-b from-[#FFF5F5] to-white overflow-hidden">

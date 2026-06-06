@@ -1,7 +1,7 @@
 'use client';
 
 export default function WhatsAppButton() {
-  const whatsappNumber = "601135503022";
+  const whatsappNumber = "601127429188";
   const message = "Hi FreshTel, I would like to inquire about your internet packages.";
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
 
