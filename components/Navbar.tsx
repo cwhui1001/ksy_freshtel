@@ -41,6 +41,12 @@ export default function Navbar() {
           >
             Packages
           </Link>
+          <Link 
+            href="/exsim" 
+            className={`${pathname === '/exsim' ? 'text-[#EF4444]' : 'text-zinc-800'} hover:text-[#EF4444] transition-colors`}
+          >
+            EXSIM
+          </Link>
         </div>
 
         {/* Mobile Menu Button */}
@@ -77,6 +83,13 @@ export default function Navbar() {
             onClick={() => setIsMenuOpen(false)}
           >
             Packages
+          </Link>
+          <Link 
+            href="/exsim" 
+            className={`text-lg font-bold uppercase ${pathname === '/exsim' ? 'text-[#EF4444]' : 'text-zinc-800'}`}
+            onClick={() => setIsMenuOpen(false)}
+          >
+            EXSIM
           </Link>
         </div>
       )}

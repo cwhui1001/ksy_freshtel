@@ -44,52 +44,33 @@ export default function WinbackPromoSection() {
   const whatsappNumber = '601127429188';
 
   return (
-    <section id="winback" className="py-16 md:py-24 bg-gradient-to-b from-[#FFF5F5] to-white overflow-hidden">
-      <div className="container mx-auto px-4 max-w-7xl">
-        {/* Visual Brand Header Banner */}
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6 mb-12 md:mb-16">
-          <div className="inline-flex items-center gap-4 bg-gradient-to-r from-[#D946EF] via-[#EC4899] to-[#EF4444] text-white py-3 px-6 md:px-8 rounded-full shadow-xl animate-bounce-slow">
-            <span className="w-3 h-3 bg-white rounded-full animate-ping"></span>
-            <h2 className="text-sm sm:text-base md:text-xl font-black uppercase tracking-wider font-sans">
-              FreshTel Winback Exclusive Offer
-            </h2>
-          </div>
-          
-          <div className="relative h-12 w-36 md:h-16 md:w-48 opacity-90">
-            <Image
-              src="/images/logo.png"
-              alt="FreshTel Internet Logo"
-              fill
-              style={{ objectFit: 'contain', objectPosition: 'right' }}
-            />
-          </div>
-        </div>
-
+    <section id="winback" className="py-16 md:py-24 pb-10 md:pb-12 bg-white overflow-hidden">
+      <div className="container mx-auto px-4 max-w-[1360px]">
         {/* Dynamic Title and Promo Duration info */}
-        <div className="text-center max-w-3xl mx-auto mb-12 md:mb-16 px-4">
+        <div className="text-center max-w-5xl mx-auto mb-12 md:mb-16 px-4">
           <h3 className="text-4xl md:text-6xl font-black text-zinc-900 tracking-tight leading-none mb-4 uppercase">
-            Double the Fun,<br className="hidden sm:inline" />
+            FreshTel<br className="hidden sm:inline" />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#EF4444] to-[#EC4899]">
-              Half the Price!
+              Winback Exclusive Offer
             </span>
           </h3>
           <p className="text-zinc-600 text-base md:text-xl font-medium">
-            Get <span className="text-[#EF4444] font-bold">50% OFF</span> for the first 12 months. Enjoy ultimate high-speed performance on our 36-month loyalty winback plans.
+            Enjoy ultimate high-speed performance on our 36-month loyalty winback plans.
           </p>
-          <div className="inline-block mt-4 bg-red-50 border border-red-100 text-[#EF4444] text-xs md:text-sm font-black px-4 py-2 rounded-xl">
+          <div className="inline-block mt-4 bg-red-50 border border-red-100 text-[#EF4444] text-md md:text-lg font-black px-4 py-2 rounded-xl">
             💥 1st 12 Months 50% OFF, followed by 24 Months Original Price
           </div>
         </div>
 
         {/* Promo Grid cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16 relative">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 xl:gap-8 mb-16 relative">
           {PROMO_PLANS.map((plan) => {
             const waUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(plan.message)}`;
             
             return (
               <div
                 key={plan.id}
-                className={`relative flex flex-col rounded-3xl p-8 sm:p-10 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl h-full border ${
+                className={`relative flex flex-col rounded-3xl p-6 sm:p-8 xl:p-10 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl h-full border ${
                   plan.highlight
                     ? 'bg-white border-[#EF4444] shadow-xl md:scale-[1.03] z-10'
                     : 'bg-[#FCFAF2] border-zinc-200 shadow-md'
@@ -115,42 +96,42 @@ export default function WinbackPromoSection() {
                   </div>
 
                   {/* Pricing Breakdown Card */}
-                  <div className="bg-white/80 backdrop-blur border border-zinc-100 rounded-2xl p-5 mb-8 shadow-inner flex flex-col gap-4">
+                  <div className="bg-white/80 backdrop-blur border border-zinc-100 rounded-2xl p-4 sm:p-5 mb-8 shadow-inner flex flex-col gap-4">
                     {/* First Tier (Promo) */}
-                    <div className="flex items-center justify-between border-b border-zinc-100 pb-3">
+                    <div className="flex items-center justify-between border-b border-zinc-100 pb-3 gap-4">
                       <div>
-                        <span className="text-xs font-black uppercase text-[#EF4444] tracking-wider block">
+                        <span className="text-sm font-black uppercase text-[#EF4444] tracking-wider block">
                           Months 1 - 12
                         </span>
-                        <span className="text-[10px] text-zinc-400 font-bold uppercase">
+                        <div className="inline-block bg-red-50 border border-red-100/50 text-[#EF4444] text-[10px] sm:text-xs font-black uppercase tracking-wider px-2.5 py-0.5 rounded-lg mt-1">
                           50% Discount Applied
-                        </span>
+                        </div>
                       </div>
-                      <div className="text-right">
+                      <div className="text-right flex-shrink-0">
                         <span className="text-2xl sm:text-3xl font-black text-[#EF4444]">
                           RM{plan.promoPrice}
                         </span>
-                        <span className="text-[10px] text-zinc-500 block uppercase font-bold">
+                        <span className="text-[10px] sm:text-xs text-zinc-400 block uppercase font-bold mt-1">
                           / Month
                         </span>
                       </div>
                     </div>
 
                     {/* Second Tier (Standard) */}
-                    <div className="flex items-center justify-between pt-1">
+                    <div className="flex items-center justify-between pt-1 gap-4">
                       <div>
-                        <span className="text-xs font-black uppercase text-zinc-700 tracking-wider block">
+                        <span className="text-sm font-black uppercase text-zinc-700 tracking-wider block">
                           Months 13 - 36
                         </span>
-                        <span className="text-[10px] text-zinc-400 font-bold uppercase">
+                        <div className="inline-block bg-zinc-50 border border-zinc-100 text-zinc-600 text-[10px] sm:text-xs font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-lg mt-1">
                           Standard Plan Price
-                        </span>
+                        </div>
                       </div>
-                      <div className="text-right">
+                      <div className="text-right flex-shrink-0">
                         <span className="text-xl sm:text-2xl font-black text-zinc-800">
                           RM{plan.regularPrice}
                         </span>
-                        <span className="text-[10px] text-zinc-500 block uppercase font-bold">
+                        <span className="text-[10px] sm:text-xs text-zinc-400 block uppercase font-bold mt-1">
                           / Month
                         </span>
                       </div>
@@ -195,7 +176,7 @@ export default function WinbackPromoSection() {
                 {[
                   { text: 'Same day / Next day installation available!!', bold: true },
                   { text: 'Best Value Plan available in the market!!', bold: true, accent: true },
-                  { text: 'Foreigner deposit RM500 only', bold: false },
+                  { text: 'Foreigner deposit RM500 only', bold: true },
                   { text: 'Target for all Brownfield (Forest City / R&F)!!', bold: true },
                 ].map((item, idx) => (
                   <li key={idx} className="flex items-start gap-4">

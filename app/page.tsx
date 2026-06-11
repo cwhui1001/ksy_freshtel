@@ -3,34 +3,51 @@ import Link from "next/link";
 import PlansSection from "@/components/PlansSection";
 import WinbackPromoSection from "@/components/WinbackPromoSection";
 import TermsAndConditions from "@/components/TermsAndConditions";
+import LumosPromoSection from "@/components/LumosPromoSection";
 
 export default function Home() {
   return (
     <main className="flex flex-col min-h-screen relative">
       {/* Hero Section */}
-      <section className="relative bg-[#FFF4F4] px-6 lg:px-40 pt-12 pb-32 md:pt-24 md:pb-48 flex flex-col md:flex-row items-center overflow-hidden uppercase font-sans">
+      <section className="relative bg-gradient-to-br from-[#FFFBFB] via-[#FFF3F3] to-[#FFE8E8] px-6 lg:px-40 pt-12 pb-32 md:pt-24 md:pb-48 flex flex-col md:flex-row items-center overflow-hidden uppercase font-sans">
         {/* Background Sketch Pattern - approximated by a simple SVG pattern */}
-        <div className="absolute inset-0 opacity-[0.05] pointer-events-none" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 10l20 20M80 10l-10 10M50 50l15 5M20 80l10-5' stroke='%23EF4444' stroke-width='1' fill='none'/%3E%3C/svg%3E")` }}></div>
+        <div className="absolute inset-0 opacity-[0.04] pointer-events-none" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 10l20 20M80 10l-10 10M50 50l15 5M20 80l10-5' stroke='%23EF4444' stroke-width='1' fill='none'/%3E%3C/svg%3E")` }}></div>
         
+        {/* Soft floating background light blobs */}
+        <div className="absolute top-1/4 left-1/12 w-80 h-80 bg-red-400/10 rounded-full blur-[100px] pointer-events-none" />
+        <div className="absolute bottom-1/4 right-1/12 w-[400px] h-[400px] bg-blue-400/10 rounded-full blur-[120px] pointer-events-none" />
+
         <div className="flex-1 z-10 text-center md:text-left">
-          <h1 className="text-[#1B365D] text-4xl sm:text-5xl md:text-6xl font-black mb-4 leading-tight tracking-tight">
+          {/* Brand pill badge */}
+          <div className="inline-flex items-center gap-2 bg-[#EF4444]/10 text-[#EF4444] px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-widest mb-6">
+            <span className="w-2 h-2 bg-[#EF4444] rounded-full animate-ping"></span>
+            🚀 High-Speed Fiber Internet
+          </div>
+
+          <h1 className="text-[#1B365D] text-4xl sm:text-5xl md:text-6xl font-black mb-6 leading-tight tracking-tight">
             NON STOP<br />
-            STREAMING <span className="text-[#3B82F6]"> 24/7</span>
+            STREAMING <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#3B82F6] via-blue-600 to-[#1D4ED8] font-black">24/7</span>
           </h1>
-          <p className="text-zinc-600 text-lg md:text-xl max-w-lg mb-8 normal-case font-medium mx-auto md:mx-0">
-            Get a whole year of reliable, high-speed internet with our 100Mbps plan.
+          <p className="text-zinc-600 text-base md:text-lg max-w-lg mb-10 normal-case font-medium mx-auto md:mx-0 leading-relaxed">
+            Get a whole year of ultra-reliable, high-speed fiber internet with our 100Mbps subscription plan. Experience seamless buffering-free downloads and zero downtime.
           </p>
           <Link 
             href="#plans" 
-            className="inline-block bg-[#3B82F6] text-white px-10 py-4 rounded-full font-bold text-lg hover:bg-blue-600 transition-colors shadow-lg"
+            className="inline-flex items-center justify-center gap-3 bg-gradient-to-r from-[#3B82F6] via-blue-600 to-[#1D4ED8] text-white px-10 py-4.5 rounded-full font-black text-base md:text-lg tracking-wider transition-all duration-300 shadow-[0_8px_30px_rgba(59,130,246,0.3)] hover:shadow-[0_8px_40px_rgba(59,130,246,0.5)] transform hover:scale-[1.03] active:scale-95 hover:-translate-y-0.5 relative overflow-hidden group/cta"
           >
-            FIND OUT MORE
+            {/* Shimmer sweep effect */}
+            <div className="absolute inset-0 w-[50%] h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 translate-x-[-150%] group-hover/cta:translate-x-[250%] transition-transform duration-1000 ease-out" />
+            <span className="relative z-10">FIND OUT MORE</span>
+            <svg className="w-5 h-5 relative z-10 transform group-hover/cta:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
           </Link>
         </div>
         
         <div className="flex-1 mt-12 md:mt-0 relative flex justify-center items-center z-10 w-full max-w-lg md:max-w-none">
+
             {/* Main content image */}
-            <div className="relative w-full aspect-[4/3] rounded-b-[3rem] md:rounded-b-[5rem] rounded-tl-[3rem] md:rounded-tl-[5rem] rounded-tr-[1.5rem] md:rounded-tr-[2rem] overflow-hidden shadow-2xl border-b-[8px] md:border-b-[12px] border-white">
+            <div className="relative w-full aspect-[4/3] rounded-b-[3rem] md:rounded-b-[5rem] rounded-tl-[3rem] md:rounded-tl-[5rem] rounded-tr-[1.5rem] md:rounded-tr-[2rem] overflow-hidden shadow-2xl border-b-[8px] md:border-b-[12px] border-white transform hover:scale-[1.01] hover:rotate-[-0.5deg] transition-all duration-500 ease-out">
                 <Image 
                   src="/images/hero-family.jpg"
                   alt="Family enjoying high-speed internet"
@@ -65,6 +82,9 @@ export default function Home() {
 
       {/* Plans Section */}
       <PlansSection />
+
+      {/* Lumos Promo Section */}
+      <LumosPromoSection />
 
       {/* Terms and Conditions Section */}
       <TermsAndConditions />
