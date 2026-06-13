@@ -4,6 +4,7 @@ import PlansSection from "@/components/PlansSection";
 import WinbackPromoSection from "@/components/WinbackPromoSection";
 import TermsAndConditions from "@/components/TermsAndConditions";
 import LumosPromoSection from "@/components/LumosPromoSection";
+import ExsimPromoSection from "@/components/ExsimPromoSection";
 
 export default function Home() {
   return (
@@ -85,6 +86,9 @@ export default function Home() {
 
       {/* Lumos Promo Section */}
       <LumosPromoSection />
+
+      {/* Exsim Promo Section */}
+      <ExsimPromoSection />
 
       {/* Terms and Conditions Section */}
       <TermsAndConditions />

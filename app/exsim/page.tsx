@@ -47,7 +47,7 @@ export default function ExsimPage() {
       <div className="max-w-[1360px] mx-auto">
         
         {/* Header Hero Section */}
-        <div className="text-center max-w-4xl mx-auto mb-16">
+        <div className="text-center max-w-5xl mx-auto mb-16">
           <div className="inline-flex items-center gap-2.5 bg-gradient-to-r from-red-500 to-pink-500 text-white py-2 px-5 rounded-full shadow-lg mb-6 animate-bounce-slow">
             <span className="w-2.5 h-2.5 bg-white rounded-full animate-ping"></span>
             <span className="text-xs sm:text-sm font-black uppercase tracking-widest font-sans">
@@ -58,7 +58,7 @@ export default function ExsimPage() {
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-zinc-900 tracking-tight leading-none mb-6 uppercase">
             FreshTel<br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#EF4444] via-pink-600 to-red-600">
-              D Series Exclusive
+              EXSIM Project Exclusive
             </span>
           </h1>
           
